@@ -1,0 +1,6 @@
+.direnv
+.terraform*
+terraform.tfstate*
+**/*.swp
+
+apps/**
