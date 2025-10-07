@@ -118,6 +118,8 @@ terraform apply -var-file=envs/talos.tfvars
 ./tools/pf.sh saleor-demo
 ```
 
+NOTE: Add `127.0.0.1 saleor-api saleor-api.saleor-demo.svc.cluster.local` to your  `hosts` file (i.e. /etc/hosts in linux)
+
 Then open:
 - **Dashboard**: http://localhost:9000
 - **Storefront**: http://localhost:3000
