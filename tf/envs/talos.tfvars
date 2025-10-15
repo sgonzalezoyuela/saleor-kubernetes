@@ -5,7 +5,7 @@ create_namespace    = true
 
 # Image versions
 saleor_image_tag    = "3.21"
-dashboard_image_tag = "latest"
+dashboard_image_tag = "3.21"
 
 # Storage configuration
 storage_class_name          = "saleor-storage"  # Use existing local-path StorageClass
