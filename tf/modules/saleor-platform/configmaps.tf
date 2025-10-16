@@ -28,7 +28,7 @@ resource "kubernetes_config_map" "saleor_backend_env" {
     DEFAULT_CHANNEL_SLUG              = "default-channel"
     HTTP_IP_FILTER_ALLOW_LOOPBACK_IPS = "True"
     HTTP_IP_FILTER_ENABLED            = "True"
-    PUBLIC_URL                        = "${var.api_protocol}://${var.api_host}:${var.api_port}"
+    PUBLIC_URL                        = "${var.api_protocol}://${local.computed_api_host}:${var.api_port}"
   }
 }
 

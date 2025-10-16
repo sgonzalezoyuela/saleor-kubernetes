@@ -43,3 +43,9 @@ variable "public_access" {
   type        = bool
   default     = false
 }
+
+variable "saleor_api_url" {
+  description = "Saleor API URL (computed from saleor-platform module)"
+  type        = string
+  default     = "http://saleor-api:8000"
+}

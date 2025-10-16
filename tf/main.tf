@@ -57,7 +57,7 @@ module "saleor_storefront" {
 
   # Storefront configuration
   image          = var.storefront_image
-  saleor_api_url = "${var.api_protocol}://${var.api_host}:${var.api_port}/graphql/"
+  saleor_api_url = "${module.saleor_platform.api_url}/graphql/"
   storefront_url = var.storefront_url
   env_vars       = var.storefront_env_vars
 
@@ -82,4 +82,10 @@ module "dummy_payement_app" {
   # Public access
   public_access = var.public_access
 
+  # API URL
+  saleor_api_url = module.saleor_platform.api_url
+
+  depends_on = [
+    module.saleor_platform
+  ]
 }

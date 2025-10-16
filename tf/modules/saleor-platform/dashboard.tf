@@ -51,7 +51,7 @@ resource "kubernetes_deployment" "saleor_dashboard" {
 
           env {
             name  = "API_URL"
-            value = "${var.api_protocol}://${var.api_host}:${var.api_port}/graphql/"
+            value = "${var.api_protocol}://${local.computed_api_host}:${var.api_port}/graphql/"
           }
 
           env_from {

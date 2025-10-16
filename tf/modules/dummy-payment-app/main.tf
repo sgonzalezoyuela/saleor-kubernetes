@@ -51,11 +51,11 @@ resource "kubernetes_deployment" "payment_app" {
 
           env {
             name  = "APP_API_BASE_URL"
-            value = "http://payment-app.saleor-demo.svc.cluster.local:3000"
+            value = local.computed_payment_url
           }
           env {
             name  = "APP_IFRAME_BASE_URL"
-            value = "http://localhost:3000?saleorApiUrl=http://saleor-api.saleor-demo.svc.cluster.local:8000/graphql/"
+            value = "${local.computed_payment_url}?saleorApiUrl=${var.saleor_api_url}/graphql/"
           }
 
           env {

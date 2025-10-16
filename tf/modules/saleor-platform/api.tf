@@ -59,12 +59,12 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "DASHBOARD_URL"
-            value = var.dashboard_url
+            value = local.computed_dashboard_url
           }
 
           env {
             name  = "ALLOWED_HOSTS"
-            value = "localhost,saleor-api,saleor-api:8000,${var.api_host},${var.api_host}:${var.api_port}"
+            value = "localhost,saleor-api,saleor-api:8000,${local.computed_api_host},${local.computed_api_host}:${var.api_port}"
           }
 
           env_from {
@@ -92,12 +92,12 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "DASHBOARD_URL"
-            value = var.dashboard_url
+            value = local.computed_dashboard_url
           }
 
           env {
             name  = "ALLOWED_HOSTS"
-            value = "localhost,saleor-api,saleor-api:8000,${var.api_host},${var.api_host}:${var.api_port}"
+            value = "localhost,saleor-api,saleor-api:8000,${local.computed_api_host},${local.computed_api_host}:${var.api_port}"
           }
 
           env_from {
@@ -128,12 +128,12 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "DASHBOARD_URL"
-            value = var.dashboard_url
+            value = local.computed_dashboard_url
           }
 
           env {
             name  = "ALLOWED_HOSTS"
-            value = "localhost,saleor-api,saleor-api:8000,${var.api_host},${var.api_host}:${var.api_port}"
+            value = "localhost,saleor-api,saleor-api:8000,${local.computed_api_host},${local.computed_api_host}:${var.api_port}"
           }
 
           env_from {

@@ -1,6 +1,6 @@
 # Example configuration for Google Kubernetes Engine (GKE)
 namespace        = "saleor-demo"
-environment      = "gke"
+environment      = "gke" # Used to confgure GKE specific options like services public access
 create_namespace = true
 
 # Image versions

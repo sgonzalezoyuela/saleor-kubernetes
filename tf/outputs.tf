@@ -28,7 +28,42 @@ output "storefront_service" {
   value       = module.saleor_storefront.storefront_service_name
 }
 
-output "ingress_endpoints" {
-  description = "Ingress endpoint URLs"
-  value       = var.ingress_enabled ? module.saleor_platform.ingress_endpoints : {}
+output "api_url" {
+  description = "Saleor API URL (with nip.io if public_access enabled)"
+  value       = module.saleor_platform.api_url
+}
+
+output "dashboard_url" {
+  description = "Saleor Dashboard URL (with nip.io if public_access enabled)"
+  value       = module.saleor_platform.dashboard_url
+}
+
+output "storefront_url" {
+  description = "Saleor Storefront URL (with nip.io if public_access enabled)"
+  value       = module.saleor_storefront.storefront_endpoint
+}
+
+output "payment_app_url" {
+  description = "Dummy Payment App URL (with nip.io if public_access enabled)"
+  value       = module.dummy_payement_app.app_url
+}
+
+output "api_lb_ip" {
+  description = "API LoadBalancer public IP (GKE only)"
+  value       = module.saleor_platform.api_lb_ip
+}
+
+output "dashboard_lb_ip" {
+  description = "Dashboard LoadBalancer public IP (GKE only)"
+  value       = module.saleor_platform.dashboard_lb_ip
+}
+
+output "storefront_lb_ip" {
+  description = "Storefront LoadBalancer public IP (GKE only)"
+  value       = module.saleor_storefront.storefront_lb_ip
+}
+
+output "payment_lb_ip" {
+  description = "Payment App LoadBalancer public IP (GKE only)"
+  value       = module.dummy_payement_app.payment_lb_ip
 }

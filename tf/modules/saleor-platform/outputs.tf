@@ -28,3 +28,23 @@ output "mailpit_service_name" {
   value       = kubernetes_service.saleor_mailpit.metadata[0].name
 }
 
+output "api_lb_ip" {
+  description = "API LoadBalancer IP (if public_access enabled)"
+  value       = local.api_lb_ip
+}
+
+output "dashboard_lb_ip" {
+  description = "Dashboard LoadBalancer IP (if public_access enabled)"
+  value       = local.dashboard_lb_ip
+}
+
+output "api_url" {
+  description = "Computed API URL"
+  value       = "${var.api_protocol}://${local.computed_api_host}:${var.api_port}"
+}
+
+output "dashboard_url" {
+  description = "Computed Dashboard URL"
+  value       = local.computed_dashboard_url
+}
+

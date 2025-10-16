@@ -41,7 +41,7 @@ resource "kubernetes_deployment" "saleor_storefront" {
               git clone https://github.com/saleor/storefront.git
               cd storefront
               echo NEXT_PUBLIC_SALEOR_API_URL=${var.saleor_api_url} > .env
-              echo NEXT_PUBLIC_STOREFRONT_URL=${var.storefront_url} >> .env
+              echo NEXT_PUBLIC_STOREFRONT_URL=${local.computed_storefront_url} >> .env
               pnpm i
               echo "building ..."
                 
@@ -70,7 +70,7 @@ resource "kubernetes_deployment" "saleor_storefront" {
 
           env {
             name  = "NEXT_PUBLIC_STOREFRONT_URL"
-            value = var.storefront_url
+            value = local.computed_storefront_url
           }
 
           dynamic "env" {

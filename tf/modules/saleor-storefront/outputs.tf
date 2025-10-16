@@ -5,6 +5,11 @@ output "storefront_service_name" {
 
 output "storefront_endpoint" {
   description = "Storefront endpoint URL"
-  value       = var.enabled ? "http://${var.host}" : ""
+  value       = var.enabled ? local.computed_storefront_url : ""
+}
+
+output "storefront_lb_ip" {
+  description = "Storefront LoadBalancer IP (if public_access enabled)"
+  value       = local.storefront_lb_ip
 }
 
