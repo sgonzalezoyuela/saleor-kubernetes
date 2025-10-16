@@ -63,12 +63,10 @@
           echo "GCLOUD set to GCP env"
           echo
           echo "use k alias to run kubecolor.  Autocomplete is also enabled."
-          alias tp='terraform plan -var-file=./envs/gke.tfvars'
-          alias ta='terraform apply -var-file=./envs/gke.tfvars'
-          alias tpf='terraform plan -target=module.saleor_platform -var-file=./envs/gke.tfvars'
-          alias taf='terraform apply -target=module.saleor_platform -var-file=./envs/gke.tfvars'
-          alias tps='terraform plan -target=module.saleor_storefront -var-file=./envs/gke.tfvars'
-          alias tas='terraform apply -target=module.saleor_storefront -var-file=./envs/gke.tfvars'
+          alias tp-pub='terraform plan -var-file=./envs/gke-public.tfvars'
+          alias ta-pub='terraform apply -var-file=./envs/gke-public.tfvars'
+          alias tp-loc='terraform plan -var-file=./envs/gke-local.tfvars'
+          alias ta-loc='terraform apply -var-file=./envs/gke-local.tfvars'
         '';
       };
     });

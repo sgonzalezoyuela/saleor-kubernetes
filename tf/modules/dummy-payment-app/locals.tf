@@ -11,5 +11,7 @@ locals {
 
   payment_lb_ip = var.enabled && var.public_access && var.environment == "gke" ? try(kubernetes_service.payment_app[0].status[0].load_balancer[0].ingress[0].ip, "") : ""
 
-  computed_payment_url = local.payment_lb_ip != "" ? "http://payment.${local.payment_lb_ip}.nip.io:${var.app_port}" : "http://dummy-payment-app:${var.app_port}"
+  computed_payment_url = local.payment_lb_ip != "" ? "http://payment.${local.payment_lb_ip}.nip.io:${var.app_port}" : (
+    var.public_access ? "http://dummy-payment-app:${var.app_port}" : "http://localhost:${var.app_port}"
+  )
 }
