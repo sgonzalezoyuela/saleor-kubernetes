@@ -20,10 +20,4 @@ api_protocol    = "http"
 # Storefront configuration
 storefront_url       = "http://localhost:3000"
 
-# Labels for talos environment
-environment_labels = {
-  "environment" = "talos"
-  "team"        = "platform"
-}
-
 dummy_payment_app_enabled =  true
