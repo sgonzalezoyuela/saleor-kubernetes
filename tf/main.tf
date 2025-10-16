@@ -44,6 +44,9 @@ module "saleor_platform" {
   api_protocol            = var.api_protocol
   api_service_annotations = var.api_service_annotations
 
+  # Public access
+  public_access = var.public_access
+
 }
 
 module "saleor_storefront" {
@@ -61,6 +64,9 @@ module "saleor_storefront" {
   # API service reference
   api_service_name = module.saleor_platform.api_service_name
 
+  # Public access
+  public_access = var.public_access
+
   depends_on = [
     module.saleor_platform
   ]
@@ -72,5 +78,8 @@ module "dummy_payement_app" {
   namespace   = var.create_namespace ? kubernetes_namespace.saleor[0].metadata[0].name : var.namespace
   environment = var.environment
   enabled     = var.dummy_payment_app_enabled
+
+  # Public access
+  public_access = var.public_access
 
 }

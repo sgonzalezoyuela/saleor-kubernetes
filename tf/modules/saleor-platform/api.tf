@@ -191,7 +191,12 @@ resource "kubernetes_service" "saleor_api" {
     )
 
     # Directly uses the map variable for annotations as you requested
-    annotations = var.api_service_annotations
+    annotations = merge(
+      var.api_service_annotations,
+      var.public_access && var.environment == "gke" ? {} : {
+        "networking.gke.io/load-balancer-type" = "Internal"
+      }
+    )
   }
 
   spec {

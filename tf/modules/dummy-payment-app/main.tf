@@ -86,6 +86,10 @@ resource "kubernetes_service" "payment_app" {
     name      = "dummy-payment-app"
     namespace = var.namespace
     labels    = local.common_labels
+
+    annotations = var.public_access && var.environment == "gke" ? {} : {
+      "networking.gke.io/load-balancer-type" = "Internal"
+    }
   }
 
   spec {
@@ -99,6 +103,6 @@ resource "kubernetes_service" "payment_app" {
       protocol    = "TCP"
     }
 
-    type = "ClusterIP"
+    type = var.public_access ? "LoadBalancer" : "ClusterIP"
   }
 }

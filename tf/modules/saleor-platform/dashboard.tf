@@ -87,6 +87,10 @@ resource "kubernetes_service" "saleor_dashboard" {
         "app.kubernetes.io/component" = "frontend"
       }
     )
+
+    annotations = var.public_access && var.environment == "gke" ? {} : {
+      "networking.gke.io/load-balancer-type" = "Internal"
+    }
   }
 
   spec {
@@ -100,7 +104,7 @@ resource "kubernetes_service" "saleor_dashboard" {
       protocol    = "TCP"
     }
 
-    type = "ClusterIP"
+    type = var.public_access ? "LoadBalancer" : "ClusterIP"
   }
 
 }

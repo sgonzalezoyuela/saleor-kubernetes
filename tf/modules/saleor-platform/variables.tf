@@ -99,3 +99,9 @@ variable "dashboard_url" {
   type        = string
   default     = "http://localhost:3000"
 }
+
+variable "public_access" {
+  description = "Enable public LoadBalancer access"
+  type        = bool
+  default     = false
+}

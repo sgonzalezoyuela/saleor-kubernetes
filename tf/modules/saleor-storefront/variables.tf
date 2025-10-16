@@ -86,3 +86,9 @@ variable "ingress_enabled" {
   type        = bool
   default     = false
 }
+
+variable "public_access" {
+  description = "Enable public LoadBalancer access"
+  type        = bool
+  default     = false
+}

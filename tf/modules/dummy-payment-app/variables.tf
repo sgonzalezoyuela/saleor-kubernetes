@@ -37,3 +37,9 @@ variable "api_url" {
   type        = string
   default     = "http://saleor-api:8000/graphql/"
 }
+
+variable "public_access" {
+  description = "Enable public LoadBalancer access"
+  type        = bool
+  default     = false
+}

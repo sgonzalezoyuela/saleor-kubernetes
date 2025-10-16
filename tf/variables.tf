@@ -133,3 +133,9 @@ variable "dummy_payment_app_enabled" {
   type        = bool
   default     = true
 }
+
+variable "public_access" {
+  description = "Enable public LoadBalancer access (GKE only)"
+  type        = bool
+  default     = false
+}
