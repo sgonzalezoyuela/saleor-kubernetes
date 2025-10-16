@@ -25,7 +25,7 @@ output "redis_service" {
 
 output "storefront_service" {
   description = "Storefront service name"
-  value       = var.storefront_enabled ? module.saleor_storefront.storefront_service_name : ""
+  value       = module.saleor_storefront.storefront_service_name
 }
 
 output "ingress_endpoints" {

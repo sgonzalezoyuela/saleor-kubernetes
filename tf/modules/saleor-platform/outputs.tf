@@ -28,12 +28,3 @@ output "mailpit_service_name" {
   value       = kubernetes_service.saleor_mailpit.metadata[0].name
 }
 
-output "ingress_endpoints" {
-  description = "Ingress endpoints"
-  value = var.ingress_enabled ? {
-    api       = "${var.ingress_tls_enabled ? "https" : "http"}://${var.api_host}"
-    dashboard = "${var.ingress_tls_enabled ? "https" : "http"}://${var.dashboard_host}"
-    jaeger    = "${var.ingress_tls_enabled ? "https" : "http"}://${var.jaeger_host}"
-    mailpit   = "${var.ingress_tls_enabled ? "https" : "http"}://${var.mailpit_host}"
-  } : {}
-}

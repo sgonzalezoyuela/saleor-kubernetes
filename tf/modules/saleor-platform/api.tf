@@ -59,7 +59,7 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "DASHBOARD_URL"
-            value = var.dashboard_url != "" ? var.dashboard_url : "https://${var.dashboard_host}/"
+            value = var.dashboard_url
           }
 
           env {
@@ -92,7 +92,7 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "DASHBOARD_URL"
-            value = var.dashboard_url != "" ? var.dashboard_url : "https://${var.dashboard_host}/"
+            value = var.dashboard_url
           }
 
           env {
@@ -128,7 +128,7 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "DASHBOARD_URL"
-            value = var.dashboard_url != "" ? var.dashboard_url : "https://${var.dashboard_host}/"
+            value = var.dashboard_url
           }
 
           env {

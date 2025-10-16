@@ -37,9 +37,3 @@ variable "api_url" {
   type        = string
   default     = "http://saleor-api:8000/graphql/"
 }
-
-variable "environment_labels" {
-  description = "Additional labels"
-  type        = map(string)
-  default     = {}
-}

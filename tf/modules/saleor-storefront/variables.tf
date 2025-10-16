@@ -86,9 +86,3 @@ variable "ingress_enabled" {
   type        = bool
   default     = false
 }
-
-variable "environment_labels" {
-  description = "Additional labels for all resources"
-  type        = map(string)
-  default     = {}
-}

@@ -7,10 +7,10 @@ resource "kubernetes_config_map" "saleor_common_env" {
 
   data = {
     CELERY_BROKER_URL           = "redis://${local.redis_host}:${local.redis_port}/1"
-    DATABASE_URL                = "postgres://${local.db_user}:${var.postgres_password}@${local.db_host}:${local.db_port}/${local.db_name}"
+    DATABASE_URL                = "postgres://${local.db_user}:changeme@${local.db_host}:${local.db_port}/${local.db_name}"
     DEFAULT_FROM_EMAIL          = "noreply@example.com"
     EMAIL_URL                   = "smtp://saleor-mailpit:1025"
-    SECRET_KEY                  = var.saleor_secret_key
+    SECRET_KEY                  = "chageme"
     OTEL_SERVICE_NAME           = "saleor"
     OTEL_TRACES_EXPORTER        = "otlp"
     OTEL_EXPORTER_OTLP_ENDPOINT = "http://saleor-jaeger:4317"

@@ -10,7 +10,7 @@ resource "kubernetes_persistent_volume_claim" "saleor_db" {
 
     resources {
       requests = {
-        storage = var.db_storage_size
+        storage = "1Gi"
       }
     }
 
@@ -30,11 +30,11 @@ resource "kubernetes_persistent_volume_claim" "saleor_media" {
   }
 
   spec {
-    access_modes = [var.media_storage_access_mode]
+    access_modes = ["ReadWriteMany"]
 
     resources {
       requests = {
-        storage = var.media_storage_size
+        storage = "1Gi"
       }
     }
 
@@ -57,7 +57,7 @@ resource "kubernetes_persistent_volume_claim" "saleor_redis" {
 
     resources {
       requests = {
-        storage = var.redis_storage_size
+        storage = "1Gi"
       }
     }
 

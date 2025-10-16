@@ -18,16 +18,6 @@ variable "dashboard_image_tag" {
   type        = string
 }
 
-variable "postgres_version" {
-  description = "PostgreSQL version"
-  type        = string
-}
-
-variable "redis_version" {
-  description = "Redis version"
-  type        = string
-}
-
 variable "create_storage_class" {
   description = "Whether to create a StorageClass resource"
   type        = bool
@@ -70,27 +60,6 @@ variable "storage_parameters" {
   default     = {}
 }
 
-variable "db_storage_size" {
-  description = "Database storage size"
-  type        = string
-}
-
-variable "media_storage_size" {
-  description = "Media storage size"
-  type        = string
-}
-
-variable "media_storage_access_mode" {
-  description = "Media storage access mode"
-  type        = string
-  default     = "ReadWriteMany"
-}
-
-variable "redis_storage_size" {
-  description = "Redis storage size"
-  type        = string
-}
-
 variable "ingress_enabled" {
   description = "Enable ingress"
   type        = bool
@@ -98,21 +67,6 @@ variable "ingress_enabled" {
 
 variable "ingress_class" {
   description = "Ingress class name"
-  type        = string
-}
-
-variable "ingress_tls_enabled" {
-  description = "Enable TLS for ingress"
-  type        = bool
-}
-
-variable "ingress_tls_secret" {
-  description = "TLS secret name"
-  type        = string
-}
-
-variable "ingress_cert_issuer" {
-  description = "Cert-manager issuer name"
   type        = string
 }
 
@@ -139,39 +93,9 @@ variable "api_service_annotations" {
   default     = {} # It's good practice to provide an empty default
 }
 
+
 variable "dashboard_url" {
-  description = "Dashboard url"
+  description = "dashboard URL"
   type        = string
-}
-
-variable "dashboard_host" {
-  description = "Dashboard hostname"
-  type        = string
-}
-
-variable "jaeger_host" {
-  description = "Jaeger hostname"
-  type        = string
-}
-
-variable "mailpit_host" {
-  description = "Mailpit hostname"
-  type        = string
-}
-
-variable "saleor_secret_key" {
-  description = "Saleor secret key"
-  type        = string
-  sensitive   = true
-}
-
-variable "postgres_password" {
-  description = "PostgreSQL password"
-  type        = string
-  sensitive   = true
-}
-
-variable "environment_labels" {
-  description = "Additional labels"
-  type        = map(string)
+  default     = "http://localhost:3000"
 }

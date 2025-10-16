@@ -30,18 +30,6 @@ api_protocol    = "http"
 #}
 
 
-# Ingress configuration
-ingress_enabled     = false
-
-# Hostnames
-dashboard_host = "dashboard.saleor.example.com"
-jaeger_host    = "jaeger.saleor.example.com"
-mailpit_host   = "mailpit.saleor.example.com"
-
-# IMPORTANT: Change these for production
-saleor_secret_key = "changeme"
-postgres_password = "changeme"
-
 # Labels
 environment_labels = {
   "environment" = "gke"

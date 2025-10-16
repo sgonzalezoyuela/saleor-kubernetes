@@ -56,7 +56,7 @@ resource "kubernetes_deployment" "saleor_db" {
 
           env {
             name  = "POSTGRES_PASSWORD"
-            value = var.postgres_password
+            value = "changeme"
           }
 
           env {
