@@ -24,7 +24,7 @@ locals {
   api_lb_ip       = var.public_access && var.environment == "gke" ? try(kubernetes_service.saleor_api.status[0].load_balancer[0].ingress[0].ip, "") : ""
   dashboard_lb_ip = var.public_access && var.environment == "gke" ? try(kubernetes_service.saleor_dashboard.status[0].load_balancer[0].ingress[0].ip, "") : ""
 
-  computed_api_host      = local.api_lb_ip != "" ? "${local.api_lb_ip}.nip.io" : var.api_host
-  computed_dashboard_url = local.dashboard_lb_ip != "" ? "${var.api_protocol}://${local.dashboard_lb_ip}.nip.io:${var.api_port}" : var.dashboard_url
+  computed_api_host      = local.api_lb_ip != "" ? "api.${local.api_lb_ip}.nip.io" : var.api_host
+  computed_dashboard_url = local.dashboard_lb_ip != "" ? "${var.api_protocol}://dashboard.${local.dashboard_lb_ip}.nip.io:${var.api_port}" : var.dashboard_url
 }
 
