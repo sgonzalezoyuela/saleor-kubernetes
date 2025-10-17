@@ -51,7 +51,7 @@ resource "kubernetes_deployment" "saleor_dashboard" {
 
           env {
             name  = "API_URL"
-            value = "${var.api_protocol}://${local.computed_api_host}:${var.api_port}/graphql/"
+            value = "${local.computed_api_url}/graphql/"
           }
 
           env_from {
@@ -71,7 +71,9 @@ resource "kubernetes_deployment" "saleor_dashboard" {
   }
 
   depends_on = [
-    kubernetes_deployment.saleor_worker
+    kubernetes_deployment.saleor_worker,
+    kubernetes_service.saleor_api,
+    kubernetes_service.saleor_dashboard
   ]
 
 }
@@ -106,5 +108,7 @@ resource "kubernetes_service" "saleor_dashboard" {
 
     type = var.public_access ? "LoadBalancer" : "ClusterIP"
   }
+
+  wait_for_load_balancer = var.public_access && var.environment == "gke" ? true : false
 
 }

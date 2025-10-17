@@ -30,7 +30,7 @@ resource "kubernetes_persistent_volume_claim" "saleor_media" {
   }
 
   spec {
-    access_modes = ["ReadWriteMany"]
+    access_modes = var.media_storage_access_modes
 
     resources {
       requests = {

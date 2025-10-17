@@ -66,12 +66,13 @@ resource "kubernetes_deployment" "saleor_db" {
 
           env {
             name  = "PGDATA"
-            value = "/var/lib/postgresql/data/pgdata"
+            value = "/var/lib/postgresql/data"
           }
 
           volume_mount {
             name       = "postgres-data"
             mount_path = "/var/lib/postgresql/data"
+            sub_path   = "pgdata"
           }
 
           volume_mount {

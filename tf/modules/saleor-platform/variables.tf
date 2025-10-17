@@ -53,6 +53,12 @@ variable "storage_allow_expansion" {
   type        = bool
   default     = true
 }
+variable "media_storage_access_modes" {
+  description = "Storage access modes (media)"
+  type        = list(string)
+  default     = ["ReadWriteMany"]
+}
+
 
 variable "storage_parameters" {
   description = "Storage class parameters"
@@ -60,25 +66,10 @@ variable "storage_parameters" {
   default     = {}
 }
 
-variable "ingress_enabled" {
-  description = "Enable ingress"
-  type        = bool
-}
-
-variable "ingress_class" {
-  description = "Ingress class name"
-  type        = string
-}
-
 variable "api_host" {
   description = "API hostname"
   type        = string
-}
-
-variable "api_protocol" {
-  description = "API protocol"
-  type        = string
-  default     = "http"
+  default     = "saleor-api.saleor-demo.svc.cluster.local"
 }
 
 variable "api_port" {
@@ -86,13 +77,6 @@ variable "api_port" {
   type        = number
   default     = 8000
 }
-
-variable "api_service_annotations" {
-  description = "A map of annotations to apply to the service metadata."
-  type        = map(string)
-  default     = {} # It's good practice to provide an empty default
-}
-
 
 variable "dashboard_url" {
   description = "dashboard URL"

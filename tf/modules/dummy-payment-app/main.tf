@@ -77,6 +77,10 @@ resource "kubernetes_deployment" "payment_app" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_service.payment_app
+  ]
 }
 
 resource "kubernetes_service" "payment_app" {
@@ -105,4 +109,6 @@ resource "kubernetes_service" "payment_app" {
 
     type = var.public_access ? "LoadBalancer" : "ClusterIP"
   }
+
+  wait_for_load_balancer = var.public_access && var.environment == "gke" ? true : false
 }

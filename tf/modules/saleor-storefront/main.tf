@@ -107,6 +107,10 @@ resource "kubernetes_deployment" "saleor_storefront" {
       }
     }
   }
+
+  depends_on = [
+    kubernetes_service.saleor_storefront
+  ]
 }
 
 resource "kubernetes_service" "saleor_storefront" {
@@ -141,4 +145,6 @@ resource "kubernetes_service" "saleor_storefront" {
 
     type = var.public_access ? "LoadBalancer" : "ClusterIP"
   }
+
+  wait_for_load_balancer = var.public_access && var.environment == "gke" ? true : false
 }

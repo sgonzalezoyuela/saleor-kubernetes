@@ -34,15 +34,10 @@ module "saleor_platform" {
   storage_volume_binding_mode = var.storage_volume_binding_mode
   storage_allow_expansion     = var.storage_allow_expansion
   storage_parameters          = var.storage_parameters
+  media_storage_access_modes  = var.media_storage_access_modes
 
-
-  # Ingress configuration
-  ingress_enabled         = var.ingress_enabled
-  ingress_class           = var.ingress_class
-  api_host                = var.api_host
-  api_port                = var.api_port
-  api_protocol            = var.api_protocol
-  api_service_annotations = var.api_service_annotations
+  api_host = var.api_host
+  api_port = var.api_port
 
   # Public access
   public_access = var.public_access
@@ -56,7 +51,7 @@ module "saleor_storefront" {
   environment = var.environment
 
   # Storefront configuration
-  image          = var.storefront_image
+  image          = "node:20-alpine"
   saleor_api_url = "${module.saleor_platform.api_url}/graphql/"
   storefront_url = var.storefront_url
   env_vars       = var.storefront_env_vars
@@ -66,10 +61,6 @@ module "saleor_storefront" {
 
   # Public access
   public_access = var.public_access
-
-  depends_on = [
-    module.saleor_platform
-  ]
 }
 
 module "dummy_payement_app" {
@@ -84,8 +75,4 @@ module "dummy_payement_app" {
 
   # API URL
   saleor_api_url = module.saleor_platform.api_url
-
-  depends_on = [
-    module.saleor_platform
-  ]
 }

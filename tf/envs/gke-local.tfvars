@@ -6,6 +6,8 @@ create_namespace = true
 # Image versions
 saleor_image_tag    = "3.21"
 dashboard_image_tag = "3.21"
+# TODO : storefront_git_commit = ""
+# TODO : dummy_payment_app__git_commit = ""
 
 # Storage configuration for GKE
 create_storage_class    = false
@@ -14,11 +16,6 @@ storage_allow_expansion = true
 storage_parameters = {
   type = "pd-standard" # or "pd-ssd" for SSD
 }
-
-# Saleor API
-api_host     = "saleor-api.saleor-demo.svc.cluster.local"
-api_port     = 8000
-api_protocol = "http"
 
 # Public access
 public_access = false

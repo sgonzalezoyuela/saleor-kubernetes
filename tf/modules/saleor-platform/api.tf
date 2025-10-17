@@ -64,7 +64,7 @@ resource "kubernetes_deployment" "saleor_api" {
 
           env {
             name  = "ALLOWED_HOSTS"
-            value = "localhost,saleor-api,saleor-api:8000,${local.computed_api_host},${local.computed_api_host}:${var.api_port}"
+            value = "localhost,saleor-api,saleor-api:8000,${local.computed_api_host},${local.computed_api_host}:8000,${local.computed_api_host}:${var.api_port}"
           }
 
           env_from {
@@ -170,7 +170,9 @@ resource "kubernetes_deployment" "saleor_api" {
   depends_on = [
     kubernetes_deployment.saleor_db,
     kubernetes_deployment.saleor_redis,
-    kubernetes_deployment.saleor_jaeger
+    kubernetes_deployment.saleor_jaeger,
+    kubernetes_service.saleor_api,
+    kubernetes_service.saleor_dashboard
   ]
 }
 
@@ -192,7 +194,6 @@ resource "kubernetes_service" "saleor_api" {
 
     # Directly uses the map variable for annotations as you requested
     annotations = merge(
-      var.api_service_annotations,
       var.public_access && var.environment == "gke" ? {} : {
         "networking.gke.io/load-balancer-type" = "Internal"
       }
@@ -214,5 +215,7 @@ resource "kubernetes_service" "saleor_api" {
       protocol    = "TCP"
     }
   }
+
+  wait_for_load_balancer = var.public_access && var.environment == "gke" ? true : false
 
 }

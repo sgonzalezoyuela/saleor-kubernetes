@@ -70,44 +70,22 @@ variable "storage_parameters" {
   default     = {}
 }
 
-variable "ingress_enabled" {
-  description = "Enable ingress for external access"
-  type        = bool
-  default     = false
+variable "media_storage_access_modes" {
+  description = "Storage access modes"
+  type        = list(string)
+  default     = ["ReadWriteMany"]
 }
 
-variable "ingress_class" {
-  description = "Ingress class name"
-  type        = string
-  default     = "nginx"
-}
-
-variable "api_protocol" {
-  description = "API protocol (http/https)"
-  type        = string
-  default     = "http"
-}
 variable "api_host" {
   description = "API public hostname"
   type        = string
-  default     = "api.saleor.local"
+  default     = "saleor-api.saleor-demo.svc.cluster.local"
 }
+
 variable "api_port" {
   description = "API port"
   type        = number
   default     = 8000
-}
-
-variable "api_service_annotations" {
-  description = "A map of annotations to apply to the service metadata."
-  type        = map(string)
-  default     = {}
-}
-
-variable "storefront_image" {
-  description = "Saleor Storefront Docker image"
-  type        = string
-  default     = "node:20-alpine"
 }
 
 variable "storefront_url" {

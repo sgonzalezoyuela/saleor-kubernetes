@@ -40,7 +40,7 @@ output "dashboard_lb_ip" {
 
 output "api_url" {
   description = "Computed API URL"
-  value       = "${var.api_protocol}://${local.computed_api_host}:${var.api_port}"
+  value       = local.computed_api_url
 }
 
 output "dashboard_url" {
