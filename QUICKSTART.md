@@ -34,4 +34,4 @@ Access the `tf` folder and run:
 terraform apply -var-file=./envs/gke-public.tfvars
 ```
 
-
+Use `tools/show-urls.sh` after deployment to get public URLs for resources

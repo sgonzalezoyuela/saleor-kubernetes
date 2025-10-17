@@ -6,8 +6,10 @@ create_namespace = true
 # Image versions
 saleor_image_tag    = "3.21"
 dashboard_image_tag = "3.21"
-# TODO : storefront_git_commit = ""
-# TODO : dummy_payment_app__git_commit = ""
+
+# Git references for apps built from source
+storefront_git_ref  = "main"
+payment_app_git_ref = "main"
 
 # Storage configuration for GKE
 create_storage_class    = false

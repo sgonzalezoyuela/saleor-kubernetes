@@ -40,6 +40,8 @@ resource "kubernetes_deployment" "saleor_storefront" {
               apk add git pnpm
               git clone https://github.com/saleor/storefront.git
               cd storefront
+              echo "Checking out ${var.git_ref}..."
+              git checkout ${var.git_ref}
               echo NEXT_PUBLIC_SALEOR_API_URL=${var.saleor_api_url} > .env
               echo NEXT_PUBLIC_STOREFRONT_URL=${local.computed_storefront_url} >> .env
               pnpm i

@@ -29,10 +29,9 @@ locals {
   computed_api_host = local.api_lb_ip != "" ? "api.${local.api_lb_ip}.nip.io" : (
     var.public_access ? var.api_host : "saleor-api.${var.namespace}.svc.cluster.local"
   )
-  computed_api_port = "8000"
-  computed_api_url  = local.computed_api_port != "80" ? "http://${local.computed_api_host}:${local.computed_api_port}" : "http://${local.computed_api_host}"
+  computed_api_url = "http://${local.computed_api_host}:8000"
 
-  computed_dashboard_url = local.dashboard_lb_ip != "" ? "http://dashboard.${local.dashboard_lb_ip}.nip.io:3000" : (
+  computed_dashboard_url = local.dashboard_lb_ip != "" ? "http://dashboard.${local.dashboard_lb_ip}.nip.io:9000" : (
     var.public_access ? var.dashboard_url : "http://localhost:3000"
   )
 }

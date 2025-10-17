@@ -34,6 +34,8 @@ resource "kubernetes_deployment" "payment_app" {
               apk add git pnpm
               git clone https://github.com/saleor/dummy-payment-app.git
               cd dummy-payment-app
+              echo "Checking out ${var.git_ref}..."
+              git checkout ${var.git_ref}
 
               echo "building ..."
               npm install --global corepack@latest

@@ -92,3 +92,9 @@ variable "public_access" {
   type        = bool
   default     = false
 }
+
+variable "git_ref" {
+  description = "Git commit, branch, or tag to checkout (e.g., main, v1.0.0, commit-hash)"
+  type        = string
+  default     = "main"
+}

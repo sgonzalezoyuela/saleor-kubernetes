@@ -11,7 +11,7 @@ variable "environment" {
 variable "enabled" {
   description = "Enable deployment"
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "app_image" {
@@ -48,4 +48,10 @@ variable "saleor_api_url" {
   description = "Saleor API URL (computed from saleor-platform module)"
   type        = string
   default     = "http://saleor-api:8000"
+}
+
+variable "git_ref" {
+  description = "Git commit, branch, or tag to checkout (e.g., main, v1.0.0, commit-hash)"
+  type        = string
+  default     = "main"
 }

@@ -106,14 +106,20 @@ variable "storefront_env_vars" {
   default     = {}
 }
 
-variable "dummy_payment_app_enabled" {
-  description = "Enable Dummy Payment App deployment"
-  type        = bool
-  default     = true
-}
-
 variable "public_access" {
   description = "Enable public LoadBalancer access (GKE only)"
   type        = bool
   default     = false
+}
+
+variable "storefront_git_ref" {
+  description = "Git commit, branch, or tag for storefront (e.g., main, v1.0.0, abc123)"
+  type        = string
+  default     = "main"
+}
+
+variable "payment_app_git_ref" {
+  description = "Git commit, branch, or tag for payment app (e.g., main, v1.0.0, abc123)"
+  type        = string
+  default     = "main"
 }

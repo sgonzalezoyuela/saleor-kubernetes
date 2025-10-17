@@ -52,9 +52,9 @@ resource "kubernetes_deployment" "saleor_worker" {
           image   = "busybox:1.35"
           command = ["sh", "-c"]
           args = [<<-EOT
-            echo "Waiting for saleor-api to be ready... ${local.computed_api_host}:${local.computed_api_port}"
-            until nc -z ${local.computed_api_host} ${local.computed_api_port}; do
-              echo "Waiting for ${local.computed_api_host}:${local.computed_api_port}..."
+          echo "Waiting for saleor-api to be ready... ${local.computed_api_host}:8000"
+            until nc -z ${local.computed_api_host} 8000; do
+              echo "Waiting for ${local.computed_api_host}:8000"
               sleep 5
             done
             echo "saleor-api is ready!"

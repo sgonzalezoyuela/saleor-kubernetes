@@ -52,6 +52,7 @@ module "saleor_storefront" {
 
   # Storefront configuration
   image          = "node:20-alpine"
+  git_ref        = var.storefront_git_ref
   saleor_api_url = "${module.saleor_platform.api_url}/graphql/"
   storefront_url = var.storefront_url
   env_vars       = var.storefront_env_vars
@@ -68,7 +69,9 @@ module "dummy_payement_app" {
 
   namespace   = var.create_namespace ? kubernetes_namespace.saleor[0].metadata[0].name : var.namespace
   environment = var.environment
-  enabled     = var.dummy_payment_app_enabled
+
+  # Git reference
+  git_ref = var.payment_app_git_ref
 
   # Public access
   public_access = var.public_access
