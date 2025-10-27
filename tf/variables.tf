@@ -7,7 +7,7 @@ variable "namespace" {
 variable "environment" {
   description = "Environment name (e.g., gke, talos)"
   type        = string
-  default     = "dev"
+  default     = "gke"
 }
 
 variable "create_namespace" {
@@ -73,7 +73,7 @@ variable "storage_parameters" {
 variable "media_storage_access_modes" {
   description = "Storage access modes"
   type        = list(string)
-  default     = ["ReadWriteMany"]
+  default     = ["ReadWriteOnce"]
 }
 
 variable "api_host" {

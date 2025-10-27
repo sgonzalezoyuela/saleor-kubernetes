@@ -67,12 +67,12 @@ resource "kubernetes_deployment" "payment_app" {
 
           resources {
             limits = {
-              memory = "2Gi"
-              cpu    = "2000m"
+              memory = "1Gi"
+              cpu    = "1000m"
             }
             requests = {
               memory = "1Gi"
-              cpu    = "1000m"
+              cpu    = "500m"
             }
           }
         }

@@ -66,7 +66,7 @@ variable "memory_limit" {
 variable "cpu_limit" {
   description = "CPU limit for storefront container"
   type        = string
-  default     = "2000m"
+  default     = "1000m"
 }
 
 variable "memory_request" {
@@ -78,7 +78,7 @@ variable "memory_request" {
 variable "cpu_request" {
   description = "CPU request for storefront container"
   type        = string
-  default     = "2000m"
+  default     = "1000m"
 }
 
 variable "ingress_enabled" {

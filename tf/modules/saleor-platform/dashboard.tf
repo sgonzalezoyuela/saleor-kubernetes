@@ -36,11 +36,11 @@ resource "kubernetes_deployment" "saleor_dashboard" {
 
           resources {
             limits = {
-              memory = "2048Mi"
+              memory = "1024Mi"
               cpu    = "500m"
             }
             requests = {
-              memory = "2048Mi"
+              memory = "1024Mi"
               cpu    = "100m"
             }
           }

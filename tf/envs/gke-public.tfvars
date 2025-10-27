@@ -13,7 +13,7 @@ payment_app_git_ref = "main"
 
 # Storage configuration for GKE
 create_storage_class    = false
-storage_class_name      = "standard-rwx"
+storage_class_name      = "standard-rwo"
 storage_allow_expansion = true
 storage_parameters = {
   type = "pd-standard" # or "pd-ssd" for SSD
