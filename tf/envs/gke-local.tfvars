@@ -7,10 +7,7 @@ create_namespace = true
 saleor_image_tag    = "3.21"
 dashboard_image_tag = "3.21"
 storefront_image_tag = "3.21"
-
-# Git references for apps built from source
-storefront_image  = "ghcr.io/sgonzalezoyuela/saleor-storefront" # 09/25/25
-dashboard_image = "ghcr.io/sgonzalezoyuela/saleor-dashboard" # 08/06/25
+payment_app_image_tag = "3.21"
 
 # Storage configuration for GKE
 create_storage_class    = false
@@ -22,5 +19,3 @@ storage_parameters = {
 
 # Public access
 public_access = false
-
-

@@ -26,26 +26,8 @@ resource "kubernetes_deployment" "payment_app" {
       spec {
 
         container {
-          name    = "app"
-          image   = var.use_prebuilt_image ? var.prebuilt_image : var.app_image
-          command = var.use_prebuilt_image ? [] : ["sh", "-c"]
-          args = var.use_prebuilt_image ? [] : [<<-EOT
-            echo "installing ..."
-            apk add git pnpm
-            git clone https://github.com/saleor/dummy-payment-app.git
-            cd dummy-payment-app
-            echo "Checking out ${var.git_ref}..."
-            git checkout ${var.git_ref}
-
-            echo "building ..."
-            npm install --global corepack@latest
-            corepack enable pnpm
-            pnpm install
-
-            echo "starting ..."
-            pnpm dev
-          EOT
-          ]
+          name  = "app"
+          image = var.payment_app_image
 
           port {
             container_port = var.app_port
@@ -69,12 +51,12 @@ resource "kubernetes_deployment" "payment_app" {
             limits = {
               memory            = "1Gi"
               cpu               = "1000m"
-              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
+              ephemeral-storage = "512Mi"
             }
             requests = {
               memory            = "1Gi"
               cpu               = "500m"
-              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
+              ephemeral-storage = "512Mi"
             }
           }
         }

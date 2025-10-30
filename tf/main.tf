@@ -52,19 +52,18 @@ module "saleor_storefront" {
   environment = var.environment
 
   # Storefront configuration
-  use_prebuilt_image = true
-  prebuilt_image     = "${var.storefront_image}:${var.storefront_image_tag}"
-  image              = "node:20-alpine"
-  git_ref            = var.storefront_git_ref
-  saleor_api_url     = "${module.saleor_platform.api_url}/graphql/"
-  storefront_url     = var.storefront_url
-  env_vars           = var.storefront_env_vars
+  storefront_image = "${var.storefront_image}:${var.storefront_image_tag}"
+  saleor_api_url   = "${module.saleor_platform.api_url}/graphql/"
+  storefront_url   = var.storefront_url
+  env_vars         = var.storefront_env_vars
 
   # API service reference
   api_service_name = module.saleor_platform.api_service_name
 
   # Public access
   public_access = var.public_access
+
+  depends_on = [module.saleor_platform]
 }
 
 module "dummy_payement_app" {
@@ -73,12 +72,14 @@ module "dummy_payement_app" {
   namespace   = var.create_namespace ? kubernetes_namespace.saleor[0].metadata[0].name : var.namespace
   environment = var.environment
 
-  # Git reference
-  git_ref = var.payment_app_git_ref
+  # Payment app configuration
+  payment_app_image = "${var.payment_app_image}:${var.payment_app_image_tag}"
 
   # Public access
   public_access = var.public_access
 
   # API URL
   saleor_api_url = module.saleor_platform.api_url
+
+  depends_on = [module.saleor_platform]
 }

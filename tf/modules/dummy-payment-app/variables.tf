@@ -14,10 +14,10 @@ variable "enabled" {
   default     = true
 }
 
-variable "app_image" {
-  description = "Docker image (e.g., node:20-alpine)"
+variable "payment_app_image" {
+  description = "Pre-built payment app Docker image with tag"
   type        = string
-  default     = "node:20-alpine"
+  default     = "ghcr.io/saleor/saleor-payment-app:latest"
 }
 
 variable "app_port" {
@@ -48,22 +48,4 @@ variable "saleor_api_url" {
   description = "Saleor API URL (computed from saleor-platform module)"
   type        = string
   default     = "http://saleor-api:8000"
-}
-
-variable "git_ref" {
-  description = "Git commit, branch, or tag to checkout (e.g., main, v1.0.0, commit-hash)"
-  type        = string
-  default     = "main"
-}
-
-variable "use_prebuilt_image" {
-  description = "Use pre-built Docker image instead of building from source"
-  type        = bool
-  default     = true
-}
-
-variable "prebuilt_image" {
-  description = "Pre-built payment app Docker image"
-  type        = string
-  default     = "ghcr.io/saleor/saleor-kubernetes/payment-app:latest"
 }

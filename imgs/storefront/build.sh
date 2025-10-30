@@ -5,7 +5,7 @@ set -euo pipefail
 # For saleor platform : 3.21
 GIT_REF="${GIT_REF:-3481bbb0e44e85aff083cace1421536c09e7bb9e}"
 IMG_VERSION="${IMG_VERSION:-3.21}"
-IMG_REGISTRY="${IMG_REGISTRY:-ghcr.io/sgonzalezoyuela/saleor-storefront}"
+IMG_REGISTRY="${IMG_REGISTRY:-ghcr.io/sgonzalezoyuela/saleor-kubernetes/saleor-storefront}"
 
 IMAGE_TAG="${IMG_REGISTRY}:${IMG_VERSION}"
 

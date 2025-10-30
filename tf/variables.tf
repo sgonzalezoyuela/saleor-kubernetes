@@ -130,14 +130,16 @@ variable "public_access" {
   default     = false
 }
 
-variable "storefront_git_ref" {
-  description = "Git commit, branch, or tag for storefront (e.g., main, v1.0.0, abc123)"
+
+
+variable "payment_app_image" {
+  description = "Saleor payment app Docker image registry"
   type        = string
-  default     = "main"
+  default     = "ghcr.io/saleor/saleor-payment-app"
 }
 
-variable "payment_app_git_ref" {
-  description = "Git commit, branch, or tag for payment app (e.g., main, v1.0.0, abc123)"
+variable "payment_app_image_tag" {
+  description = "Saleor payment app image tag"
   type        = string
-  default     = "main"
+  default     = "latest"
 }

@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 
 set -euo pipefail
-
+# Control payment app version
 GIT_REF="${GIT_REF:-f63c209035177f62dba63839fb61927fe94f81f0}"
 IMG_VERSION="${IMG_VERSION:-3.21}"
-IMG_REGISTRY="${IMG_REGISTRY:-ghcr.io/sgonzalezoyuela/saleor-payment-app}"
+IMG_REGISTRY="${IMG_REGISTRY:-ghcr.io/sgonzalezoyuela/saleor-kubernetes/saleor-payment-app}"
 
 IMAGE_TAG="${IMG_REGISTRY}:${IMG_VERSION}"
 

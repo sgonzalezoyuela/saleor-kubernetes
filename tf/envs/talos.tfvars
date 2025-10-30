@@ -7,10 +7,10 @@ create_namespace = true
 saleor_image_tag    = "3.21"
 dashboard_image_tag = "3.21"
 storefront_image_tag = "3.21"
+payment_app_image_tag = "3.21"
 
-# Git references for apps built from source
-storefront_image  = "ghcr.io/sgonzalezoyuela/saleor-storefront" # 09/25/25
-dashboard_image = "ghcr.io/sgonzalezoyuela/saleor-dashboard" # 08/06/25
+payment_app_image = "ghcr.io/sgonzalezoyuela/saleor-kubernetes/saleor-payment-app"
+storefront_image = "ghcr.io/sgonzalezoyuela/saleor-kubernetes/saleor-storefront"
 
 # Storage configuration
 storage_class_name         = "saleor-storage" # Use existing local-path StorageClass

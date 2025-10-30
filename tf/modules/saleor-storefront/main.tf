@@ -48,25 +48,8 @@ resource "kubernetes_deployment" "saleor_storefront" {
         }
 
         container {
-          name    = "storefront"
-          image   = var.use_prebuilt_image ? var.prebuilt_image : var.image
-          command = var.use_prebuilt_image ? [] : ["sh", "-c"]
-          args = var.use_prebuilt_image ? [] : [<<-EOT
-            echo "installing ..."
-            apk add git pnpm
-            git clone https://github.com/saleor/storefront.git
-            cd storefront
-            echo "Checking out ${var.git_ref}..."
-            git checkout ${var.git_ref}
-            echo NEXT_PUBLIC_SALEOR_API_URL=${var.saleor_api_url} > .env
-            echo NEXT_PUBLIC_STOREFRONT_URL=${local.computed_storefront_url} >> .env
-            pnpm i
-            echo "building ..."
-            pnpm build
-            echo "starting ..."
-            pnpm start
-          EOT
-          ]
+          name  = "storefront"
+          image = var.storefront_image
 
           port {
             container_port = 3000
@@ -102,12 +85,12 @@ resource "kubernetes_deployment" "saleor_storefront" {
             limits = {
               memory            = var.memory_limit
               cpu               = var.cpu_limit
-              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
+              ephemeral-storage = "512Mi"
             }
             requests = {
               memory            = var.memory_request
               cpu               = var.cpu_request
-              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
+              ephemeral-storage = "512Mi"
             }
           }
 
