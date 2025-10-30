@@ -31,33 +31,40 @@ resource "kubernetes_deployment" "saleor_storefront" {
 
       spec {
         hostname = "storefront"
-        container {
-          name    = "storefront"
-          image   = var.image
+
+        init_container {
+          name    = "wait-for-api"
+          image   = "busybox:latest"
           command = ["sh", "-c"]
           args = [<<-EOT
-              echo "installing ..."
-              apk add git pnpm
-              git clone https://github.com/saleor/storefront.git
-              cd storefront
-              echo "Checking out ${var.git_ref}..."
-              git checkout ${var.git_ref}
-              echo NEXT_PUBLIC_SALEOR_API_URL=${var.saleor_api_url} > .env
-              echo NEXT_PUBLIC_STOREFRONT_URL=${local.computed_storefront_url} >> .env
-              pnpm i
-              echo "building ..."
-                
-              echo "Waiting for saleor-api to be ready..."
-              until wget --spider --timeout=5 --tries=1 --no-check-certificate "${var.saleor_api_url}" 2>/dev/null; do
-                echo "Waiting for API at ${var.saleor_api_url}..."
-                sleep 5
-              done
-              echo "API is ready!"
+            echo "Waiting for saleor-api to be ready..."
+            until wget --spider --timeout=5 --tries=1 --no-check-certificate "${var.saleor_api_url}" 2>/dev/null; do
+              echo "Waiting for API at ${var.saleor_api_url}..."
+              sleep 5
+            done
+            echo "API is ready!"
+          EOT
+          ]
+        }
 
-              echo "saleor-api is ready!"
-              pnpm build
-              echo "starting ..."
-              pnpm start
+        container {
+          name    = "storefront"
+          image   = var.use_prebuilt_image ? var.prebuilt_image : var.image
+          command = var.use_prebuilt_image ? [] : ["sh", "-c"]
+          args = var.use_prebuilt_image ? [] : [<<-EOT
+            echo "installing ..."
+            apk add git pnpm
+            git clone https://github.com/saleor/storefront.git
+            cd storefront
+            echo "Checking out ${var.git_ref}..."
+            git checkout ${var.git_ref}
+            echo NEXT_PUBLIC_SALEOR_API_URL=${var.saleor_api_url} > .env
+            echo NEXT_PUBLIC_STOREFRONT_URL=${local.computed_storefront_url} >> .env
+            pnpm i
+            echo "building ..."
+            pnpm build
+            echo "starting ..."
+            pnpm start
           EOT
           ]
 
@@ -83,7 +90,6 @@ resource "kubernetes_deployment" "saleor_storefront" {
             }
           }
 
-          # Add any additional environment variables
           dynamic "env" {
             for_each = var.env_vars
             content {
@@ -96,12 +102,12 @@ resource "kubernetes_deployment" "saleor_storefront" {
             limits = {
               memory            = var.memory_limit
               cpu               = var.cpu_limit
-              ephemeral-storage = "2Gi"
+              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
             }
             requests = {
               memory            = var.memory_request
               cpu               = var.cpu_request
-              ephemeral-storage = "2Gi"
+              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
             }
           }
 

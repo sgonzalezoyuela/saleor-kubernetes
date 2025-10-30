@@ -8,7 +8,7 @@ locals {
   )
 
   saleor_image    = "ghcr.io/saleor/saleor:${var.saleor_image_tag}"
-  dashboard_image = "ghcr.io/saleor/saleor-dashboard:${var.dashboard_image_tag}"
+  dashboard_image = "${var.dashboard_image}:${var.dashboard_image_tag}"
   # these could be configured as vars if needed
   postgres_image = "library/postgres:15-alpine"
   redis_image    = "redis:7-alpine"

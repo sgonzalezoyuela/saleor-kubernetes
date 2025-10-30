@@ -132,6 +132,14 @@ Default admin credentials: `admin@example.com` / `admin`
 ## Directory Structure
 
 ```
+imgs/                               # Docker image builds
+├── storefront/                     # Storefront Dockerfile
+│   ├── Dockerfile
+│   └── .dockerignore
+├── payment-app/                    # Payment app Dockerfile
+│   ├── Dockerfile
+│   └── .dockerignore
+└── README.md                       # Build instructions
 tf/
 ├── main.tf                          # Root module orchestration
 ├── variables.tf                     # Input variables
@@ -221,14 +229,16 @@ The main module deploys all core Saleor components:
 ### saleor-storefront
 
 Deploys the customer-facing Next.js storefront:
-- Clones from GitHub on startup
-- Builds and starts the application
+- **Default**: Uses pre-built Docker image (fast deployment)
+- **Alternative**: Can build from GitHub source (set `use_prebuilt_image = false`)
 - Connects to API GraphQL endpoint
 - Can be disabled via `storefront_enabled = false`
 
 ### dummy-payment-app
 
 Deploys a demo payment application:
+- **Default**: Uses pre-built Docker image (fast deployment)
+- **Alternative**: Can build from GitHub source (set `use_prebuilt_image = false`)
 - Shows payment integration patterns
 - Connects to Saleor API
 - Can be disabled via `dummy_payment_app_enabled = false`
@@ -255,13 +265,16 @@ API and Worker pods prefer co-location for:
 - Reduced network latency
 - Better cache locality
 
-### Source-Based Builds
+### Pre-built Images (Default)
 
-Storefront and Payment App build from GitHub:
-- Always uses latest code
-- No custom image registry needed
-- Slower startup (3-5 minutes first time)
-- Requires ephemeral storage and internet access
+Storefront and Payment App use pre-built Docker images by default:
+- **Fast startup**: 10-30 seconds vs 3-5 minutes
+- **Consistent deployments**: Same image across all environments
+- **Resource efficient**: No build resources needed in cluster
+- **Reliable**: No dependency on GitHub at deploy time
+- See `imgs/` directory for Dockerfiles and build instructions
+
+**Fallback to source builds**: Set `use_prebuilt_image = false` for development or custom builds
 
 ### Service Discovery
 
@@ -339,9 +352,15 @@ kubectl get events -n saleor-demo --sort-by='.lastTimestamp'
 
 ### Common Issues
 
-**Storefront takes long to start:**
-- First build takes 3-5 minutes
+**Storefront/Payment app takes long to start:**
+- If using pre-built images: Should start in 10-30 seconds
+- If building from source (`use_prebuilt_image = false`): First build takes 3-5 minutes
 - Check logs: `kubectl logs -n saleor-demo deployment/saleor-storefront`
+
+**Image pull errors:**
+- Verify image exists: `docker pull <image-name>`
+- Check GitHub Container Registry permissions if using ghcr.io
+- See `imgs/README.md` for building images locally
 
 **API migrations fail:**
 - Check database is running: `kubectl get pod -n saleor-demo -l app=saleor-db`

@@ -55,3 +55,15 @@ variable "git_ref" {
   type        = string
   default     = "main"
 }
+
+variable "use_prebuilt_image" {
+  description = "Use pre-built Docker image instead of building from source"
+  type        = bool
+  default     = true
+}
+
+variable "prebuilt_image" {
+  description = "Pre-built payment app Docker image"
+  type        = string
+  default     = "ghcr.io/saleor/saleor-kubernetes/payment-app:latest"
+}

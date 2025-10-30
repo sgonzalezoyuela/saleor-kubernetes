@@ -13,6 +13,12 @@ variable "saleor_image_tag" {
   type        = string
 }
 
+variable "dashboard_image" {
+  description = "Saleor dashboard Docker image registry"
+  type        = string
+  default     = "ghcr.io/saleor/saleor-dashboard"
+}
+
 variable "dashboard_image_tag" {
   description = "Saleor dashboard image tag"
   type        = string

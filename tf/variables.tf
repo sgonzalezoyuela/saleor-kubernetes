@@ -22,6 +22,24 @@ variable "saleor_image_tag" {
   default     = "3.21"
 }
 
+variable "storefront_image" {
+  description = "Saleor storefront Docker image registry"
+  type        = string
+  default     = "ghcr.io/saleor/saleor-storefront"
+}
+
+variable "storefront_image_tag" {
+  description = "Saleor storefront image tag"
+  type        = string
+  default     = "latest"
+}
+
+variable "dashboard_image" {
+  description = "Saleor dashboard Docker image registry"
+  type        = string
+  default     = "ghcr.io/saleor/saleor-dashboard"
+}
+
 variable "dashboard_image_tag" {
   description = "Saleor dashboard image tag"
   type        = string

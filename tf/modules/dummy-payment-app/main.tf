@@ -27,23 +27,23 @@ resource "kubernetes_deployment" "payment_app" {
 
         container {
           name    = "app"
-          image   = var.app_image
-          command = ["sh", "-c"]
-          args = [<<-EOT
-              echo "installing ..."
-              apk add git pnpm
-              git clone https://github.com/saleor/dummy-payment-app.git
-              cd dummy-payment-app
-              echo "Checking out ${var.git_ref}..."
-              git checkout ${var.git_ref}
+          image   = var.use_prebuilt_image ? var.prebuilt_image : var.app_image
+          command = var.use_prebuilt_image ? [] : ["sh", "-c"]
+          args = var.use_prebuilt_image ? [] : [<<-EOT
+            echo "installing ..."
+            apk add git pnpm
+            git clone https://github.com/saleor/dummy-payment-app.git
+            cd dummy-payment-app
+            echo "Checking out ${var.git_ref}..."
+            git checkout ${var.git_ref}
 
-              echo "building ..."
-              npm install --global corepack@latest
-              corepack enable pnpm
-              pnpm install
+            echo "building ..."
+            npm install --global corepack@latest
+            corepack enable pnpm
+            pnpm install
 
-              echo "starting ..."
-              pnpm dev
+            echo "starting ..."
+            pnpm dev
           EOT
           ]
 
@@ -67,12 +67,14 @@ resource "kubernetes_deployment" "payment_app" {
 
           resources {
             limits = {
-              memory = "1Gi"
-              cpu    = "1000m"
+              memory            = "1Gi"
+              cpu               = "1000m"
+              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
             }
             requests = {
-              memory = "1Gi"
-              cpu    = "500m"
+              memory            = "1Gi"
+              cpu               = "500m"
+              ephemeral-storage = var.use_prebuilt_image ? "512Mi" : "2Gi"
             }
           }
         }

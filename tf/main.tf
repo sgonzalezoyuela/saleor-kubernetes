@@ -24,6 +24,7 @@ module "saleor_platform" {
   namespace           = var.create_namespace ? kubernetes_namespace.saleor[0].metadata[0].name : var.namespace
   environment         = var.environment
   saleor_image_tag    = var.saleor_image_tag
+  dashboard_image     = var.dashboard_image
   dashboard_image_tag = var.dashboard_image_tag
 
   # Storage configuration
@@ -51,11 +52,13 @@ module "saleor_storefront" {
   environment = var.environment
 
   # Storefront configuration
-  image          = "node:20-alpine"
-  git_ref        = var.storefront_git_ref
-  saleor_api_url = "${module.saleor_platform.api_url}/graphql/"
-  storefront_url = var.storefront_url
-  env_vars       = var.storefront_env_vars
+  use_prebuilt_image = true
+  prebuilt_image     = "${var.storefront_image}:${var.storefront_image_tag}"
+  image              = "node:20-alpine"
+  git_ref            = var.storefront_git_ref
+  saleor_api_url     = "${module.saleor_platform.api_url}/graphql/"
+  storefront_url     = var.storefront_url
+  env_vars           = var.storefront_env_vars
 
   # API service reference
   api_service_name = module.saleor_platform.api_service_name

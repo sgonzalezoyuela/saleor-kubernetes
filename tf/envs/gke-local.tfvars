@@ -6,10 +6,11 @@ create_namespace = true
 # Image versions
 saleor_image_tag    = "3.21"
 dashboard_image_tag = "3.21"
+storefront_image_tag = "3.21"
 
 # Git references for apps built from source
-storefront_git_ref  = "3481bbb0e44e85aff083cace1421536c09e7bb9e" # 09/25/25
-payment_app_git_ref = "f63c209035177f62dba63839fb61927fe94f81f0" # 08/06/25
+storefront_image  = "ghcr.io/sgonzalezoyuela/saleor-storefront" # 09/25/25
+dashboard_image = "ghcr.io/sgonzalezoyuela/saleor-dashboard" # 08/06/25
 
 # Storage configuration for GKE
 create_storage_class    = false
