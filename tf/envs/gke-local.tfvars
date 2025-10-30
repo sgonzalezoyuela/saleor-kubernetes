@@ -6,8 +6,12 @@ create_namespace = true
 # Image versions
 saleor_image_tag    = "3.21"
 dashboard_image_tag = "3.21"
+
 storefront_image_tag = "3.21"
+storefront_image = "ghcr.io/sgonzalezoyuela/saleor-kubernetes/saleor-storefront"
+
 payment_app_image_tag = "3.21"
+payment_app_image = "ghcr.io/sgonzalezoyuela/saleor-kubernetes/saleor-payment-app"
 
 # Storage configuration for GKE
 create_storage_class    = false
